@@ -1,0 +1,39 @@
+.book-details{
+    
+    >button{
+        margin-block-start: 1em;
+        color: rgb(46, 46, 46);
+    }
+
+    >h1{
+        text-decoration: underline;
+        margin-block-start: 0.2em;
+    }
+
+    >h1, h3, h4, p{
+        /* margin: 0.7em 0; */
+        margin-block-end: 0.6em;
+    }
+
+    
+}
+
+span.book-detail{
+        color: green;
+}
+
+span.book-comment{
+    color: rgb(255, 174, 0);
+}
+
+span.cheap{
+    color: rgb(0, 255, 85);
+}
+
+span.expensive{
+    color: red;
+}
+
+span.book-sale{
+    color: rgb(229, 255, 0);
+}

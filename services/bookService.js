@@ -96,11 +96,11 @@ function _createBooks() {
     }
 }
 
-function _createBook(title, listPrice = 250) {
-    const book = getEmptyBook(title, listPrice)
-    book.id = utilService.makeId()
-    return book
-}
+// function _createBook(title, listPrice = 250) {
+//     const book = getEmptyBook(title, listPrice)
+//     book.id = utilService.makeId()
+//     return book
+// }
 
 function _setNextPrevBookId(book) {
     return storageService.query(BOOK_KEY).then((books) => {
@@ -131,3 +131,31 @@ function _setNextPrevBookId(book) {
 //     }, {})
 //     return carCountByVendorMap
 // }
+
+// Full Demo Data - changed price from 10 - 200 to see price color classes
+
+function _createBooks() {
+    const ctgs = ['Love', 'Fiction', 'Poetry', 'Computers', 'Religion']
+    const books = []
+    for (let i = 0; i < 20; i++) {
+        const book = {
+            id: utilService.makeId(),
+            title: utilService.makeLorem(2),
+            subtitle: utilService.makeLorem(4),
+            authors: [utilService.makeLorem(1)],
+            publishedDate: utilService.getRandomIntInclusive(1950, 2026),
+            description: utilService.makeLorem(20),
+            pageCount: utilService.getRandomIntInclusive(20, 600),
+            categories: [ctgs[utilService.getRandomIntInclusive(0, ctgs.length - 1)]],
+            thumbnail: `https://coding-academy.org/books-photos/${i + 1}.jpg`,
+            language: "en",
+            listPrice: {
+                amount: utilService.getRandomIntInclusive(10, 200),
+                currencyCode: "EUR",
+                isOnSale: Math.random() > 0.7
+            }
+        }
+        books.push(book)
+    }
+    utilService.saveToStorage(BOOK_KEY, books)
+}
