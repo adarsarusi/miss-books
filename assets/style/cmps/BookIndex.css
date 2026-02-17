@@ -1,3 +1,13 @@
 button{
     color: rgb(36, 36, 36);
 }
+
+.book-list{
+    display: flex;
+    flex-direction: column;
+
+    >ul>li{
+        border: 1px solid whitesmoke;
+        border-radius: 15px;
+    }
+}

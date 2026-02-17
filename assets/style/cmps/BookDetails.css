@@ -37,3 +37,13 @@ span.expensive{
 span.book-sale{
     color: rgb(229, 255, 0);
 }
+
+.book-read-more{
+    color: aqua;
+    opacity: 0.7;
+    cursor: pointer;
+
+    &:hover{
+        opacity: 1;
+    }
+}

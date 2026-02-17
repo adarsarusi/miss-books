@@ -27,6 +27,25 @@ function query(filterBy = {}) {
                 books = books.filter(book => book.listPrice >= filterBy.minPrice)
             }
 
+            if (filterBy.pageCount) {
+                books = books.filter(book => book.pageCount >= filterBy.pageCount)
+            }
+
+            if (filterBy.author) {
+                const regExp = new RegExp(filterBy.author, 'i')
+                books = books.filter(book => regExp.test(book.authors))
+            }
+
+            if (filterBy.minPublishDate){
+                books = books.filter(book => book.publishedDate >= filterBy.minPublishDate)
+            }
+
+            if (filterBy.category){
+                console.log(filterBy.category)
+                if (filterBy.category !== 'All')
+                    books = books.filter( book => book.categories[0] === filterBy.category)
+            }
+
             return books
         })
 }
@@ -144,7 +163,7 @@ function _createBooks() {
             subtitle: utilService.makeLorem(4),
             authors: [utilService.makeLorem(1)],
             publishedDate: utilService.getRandomIntInclusive(1950, 2026),
-            description: utilService.makeLorem(20),
+            description: utilService.makeLorem(utilService.getRandomIntInclusive(20, 40)),
             pageCount: utilService.getRandomIntInclusive(20, 600),
             categories: [ctgs[utilService.getRandomIntInclusive(0, ctgs.length - 1)]],
             thumbnail: `https://coding-academy.org/books-photos/${i + 1}.jpg`,

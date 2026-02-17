@@ -1,3 +1,5 @@
+import { LongTxt } from '../cmps/LongTxt.jsx'
+
 export function BookDetails({book, onClearSelectedBook}){
 
     let reading = ''
@@ -34,7 +36,7 @@ export function BookDetails({book, onClearSelectedBook}){
         <h4><span className="book-detail">Language:</span> {book.language}</h4>
         <h4><span className="book-detail">Pages:</span> {book.pageCount} <span className="book-comment">{reading}</span></h4>
         <h4><span className="book-detail">Price:</span> <span className={priceClassList()}>{book.listPrice.amount}</span> {book.listPrice.currencyCode} <span className="book-sale">{sale}</span></h4>
-        <p>{book.description}</p>
+        <LongTxt txt={book.description} />
         <img src={book.thumbnail} alt="" />
     </article>
 }
