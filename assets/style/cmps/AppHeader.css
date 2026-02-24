@@ -17,7 +17,7 @@
     padding: 0.5em;
 }
 
-.app-nav {
+nav {
     display: flex;
     gap: 15px;
 }

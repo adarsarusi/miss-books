@@ -10,6 +10,8 @@
 @import "cmps/Home.css";
 @import "cmps/AppHeader.css";
 @import "cmps/BookIndex.css";
+@import "cmps/BookList.css";
 @import "cmps/BookDetails.css";
+@import "cmps/BookReviews.css";
 @import "cmps/BookFilter.css";
 @import "cmps/UserMsg.css";

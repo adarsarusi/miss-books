@@ -1,0 +1,14 @@
+.review-form{
+    margin-block-start: 10px;
+
+    border: 1px solid whitesmoke;
+    border-radius: 15px;
+
+    >.review{
+        margin-block-start: 10px;
+    }
+
+    >button{
+        margin-block-end: 10px;
+    }
+}

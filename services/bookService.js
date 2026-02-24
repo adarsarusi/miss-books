@@ -10,7 +10,8 @@ export const bookService = {
     remove,
     save,
     getEmptyBook,
-    getDefaultFilter
+    getDefaultFilter,
+    addReview
 }
 // For Debug (easy access from console):
 // window.cs = carService
@@ -36,14 +37,14 @@ function query(filterBy = {}) {
                 books = books.filter(book => regExp.test(book.authors))
             }
 
-            if (filterBy.minPublishDate){
+            if (filterBy.minPublishDate) {
                 books = books.filter(book => book.publishedDate >= filterBy.minPublishDate)
             }
 
-            if (filterBy.category){
+            if (filterBy.category) {
                 console.log(filterBy.category)
                 if (filterBy.category !== 'All')
-                    books = books.filter( book => book.categories[0] === filterBy.category)
+                    books = books.filter(book => book.categories[0] === filterBy.category)
             }
 
             return books
@@ -70,6 +71,14 @@ function save(book) {
     }
 }
 
+function addReview(bookId, review){
+    review.id = utilService.makeId()
+
+    return get(bookId).then(book => {
+        book.reviews.push(review)
+        return storageService.put(BOOK_KEY, book)
+    })
+}
 
 function getDefaultFilter(filterBy = { txt: '', minPrice: 0 }) {
     return { txt: filterBy.txt, minPrice: filterBy.minPrice }
@@ -99,7 +108,25 @@ function getDefaultFilter(filterBy = { txt: '', minPrice: 0 }) {
 // }
 
 function getEmptyBook(title = '', listPrice = '') {
-    return { title, listPrice }
+    const ctgs = ['Love', 'Fiction', 'Poetry', 'Computers', 'Religion']
+
+    return {
+        title: title,
+        subtitle: utilService.makeLorem(4),
+        authors: [utilService.makeLorem(1)],
+        publishedDate: utilService.getRandomIntInclusive(1950, 2026),
+        description: utilService.makeLorem(utilService.getRandomIntInclusive(20, 40)),
+        pageCount: utilService.getRandomIntInclusive(20, 600),
+        categories: [ctgs[utilService.getRandomIntInclusive(0, ctgs.length - 1)]],
+        thumbnail: `https://coding-academy.org/books-photos/${utilService.getRandomIntInclusive(1, 20)}.jpg`,
+        language: "en",
+        listPrice: {
+            amount: listPrice,
+            currencyCode: "EUR",
+            isOnSale: Math.random() > 0.7
+        },
+        reviews: []
+    }
 }
 
 function _createBooks() {
@@ -172,7 +199,8 @@ function _createBooks() {
                 amount: utilService.getRandomIntInclusive(10, 200),
                 currencyCode: "EUR",
                 isOnSale: Math.random() > 0.7
-            }
+            },
+            reviews: []
         }
         books.push(book)
     }
